@@ -87,6 +87,17 @@ class NaverMap extends React.Component {
     const mapNaver = new naver.maps.Map(this.mapRef.current, mapOpts)
     this.mapNaver = mapNaver
 
+    // 지적도 레이어 추가
+    if (_this.props.jijuk) {
+      var cadastralLayer = new naver.maps.CadastralLayer()
+      cadastralLayer.setMap(mapNaver)
+    }
+
+    // boundingBox 이벤트함수 사용
+    if (_this.props.test) {
+      _this.props.test(mapNaver.bounds, mapNaver.zoom)
+    }
+
     const CustomOverlay = getCustomOverlayClass(window.naver)
 
     this.listeners = []
@@ -113,6 +124,10 @@ class NaverMap extends React.Component {
   }
 
   handleBoundChanged = bounds => {
+    if (_this.props.test) {
+      _this.props.test(bounds, _this.mapNaver.zoom)
+    }
+
     const self = this
     if (this.props.onBoundChange) {
       if (!this.lastBoundChangedTime || this.lastBoundChangedTime < +new Date() - 100) {

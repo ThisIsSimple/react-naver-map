@@ -2,12 +2,7 @@
 
 > React NaverMap Component
 
-[![NPM](https://img.shields.io/npm/v/react-naver-map.svg)](https://www.npmjs.com/package/react-naver-map)
-
-네이버 지도 자바스크립트 v3을 감싼 리액트 컴포넌트 입니다.
-
-0.0.21 버전부터 Marker, Polyline, Polygon에서 id를 받지 않습니다. 또한 onClick에서도 id를 더이상 리턴하지 않습니다.
-
+[seungmo 님의 react-naver-map](https://www.npmjs.com/package/react-naver-map) 에서 필요한 기능을 살짝 수정한 패키지
 
 ## Install
 
@@ -169,4 +164,4 @@ render() {
 
 ## License
 
-MIT © [seongmo](https://github.com/seongmo)
+MIT

@@ -38,7 +38,7 @@ export default class Polygon extends React.Component {
     const nextPaths = this.props.paths
 
     if (JSON.stringify(prevPaths) !== JSON.stringify(nextPaths)) {
-      polygon.setPaths(nextPath)
+      polygon.setPaths(nextPaths)
     }
   }
 
