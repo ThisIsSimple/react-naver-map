@@ -132,7 +132,7 @@ class NaverMap extends React.Component {
 
     const self = this
     if (this.props.onBoundChange) {
-      if (!this.lastBoundChangedTime || this.lastBoundChangedTime < +new Date() - 100) {
+      if (!this.lastBoundChangedTime || this.lastBoundChangedTime < +new Date() - 500) {
         this.lastBoundChangedTime = +new Date()
         self.props.onBoundChange(bounds)
       }

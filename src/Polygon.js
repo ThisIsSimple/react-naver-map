@@ -9,6 +9,7 @@ export default class Polygon extends React.Component {
     strokeColor: t.string,
     strokeOpacity: t.number,
     strokeWeight: t.number,
+    zIndex: t.number,
   }
 
   componentDidMount() {
@@ -21,6 +22,7 @@ export default class Polygon extends React.Component {
       strokeColor: this.props.strokeColor,
       strokeOpacity: this.props.strokeOpacity,
       strokeWeight: this.props.strokeWeight,
+      zIndex: this.props.zIndex,
     })
     this.polygon = polygon
 
