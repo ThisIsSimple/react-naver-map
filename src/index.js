@@ -194,6 +194,7 @@ NaverMap.propTypes = {
     lat: PropTypes.number.isRequired,
     lng: PropTypes.number.isRequired,
   }),
+  jijuk: PropTypes.bool,
   initialZoom: PropTypes.number,
   maxZoom: PropTypes.number,
   onBoundChange: PropTypes.func,
