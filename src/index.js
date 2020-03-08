@@ -81,6 +81,10 @@ class NaverMap extends React.Component {
     if (this.props.initialBounds) {
       mapOpts.bounds = this.props.initialBounds
     }
+    // 0308 maxZoom option 추가
+    if (this.props.maxZoom) {
+      mapOpts.maxZoom = this.props.maxZoom
+    }
 
     // 타일맵 버전 변경 0225
     mapOpts['useStyleMap'] = true
@@ -89,50 +93,55 @@ class NaverMap extends React.Component {
     const mapNaver = new naver.maps.Map(this.mapRef.current, mapOpts)
     this.mapNaver = mapNaver
 
-    // 지적도 레이어 옵션 추가
-    if (this.props.jijuk) {
-      var cadastralLayer = new naver.maps.CadastralLayer()
-      cadastralLayer.setMap(mapNaver)
-    }
+    // init_stylemap 이후 옵션 설정? 레이어 생성? 하라는 메세지 떠서 바꿈 0308
+    naver.maps.Event.once(mapNaver, 'init_stylemap', () => {
+      // 지적도 레이어 옵션 추가 -> 0308 지적도 레이어 스타일맵 옵션 추가
+      if (this.props.jijuk) {
+        var cadastralLayer = new naver.maps.CadastralLayer({useStyleMap: true})
+        cadastralLayer.setMap(mapNaver)
+      }
 
-    // boundingBox 이벤트
-    if (this.props.bbCheck) {
-      this.props.bbCheck(mapNaver.bounds, mapNaver.zoom)
-    }
+      // // boundingBox 이벤트 -> 0308 없어도 될듯
+      // if (this.props.bbCheck) {
+      //   this.props.bbCheck(mapNaver.bounds, mapNaver.zoom)
+      // }
 
-    const CustomOverlay = getCustomOverlayClass(window.naver)
+      const CustomOverlay = getCustomOverlayClass(window.naver)
 
-    this.listeners = []
-    // Regist Event Handler
-    this.listeners.push(
-      naver.maps.Event.addListener(mapNaver, 'bounds_changed', this.handleBoundChanged),
-    )
-    this.listeners.push(naver.maps.Event.addListener(mapNaver, 'click', this.handleMapClick))
-    // Ui Events
-    const listeningEvents = this.props.listeningEvents || []
-    if (this.props.onUiEvent) {
-      Object.values(UiEvents)
-        .filter(evtType => listeningEvents.includes(evtType))
-        .forEach(eventType => {
-          this.listeners.push(
-            naver.maps.Event.addListener(mapNaver, eventType, this.props.onUiEvent),
-          )
-        })
-    }
+      this.listeners = []
+      // Regist Event Handler
+      this.listeners.push(
+        naver.maps.Event.addListener(mapNaver, 'bounds_changed', this.handleBoundChanged),
+      )
+      this.listeners.push(naver.maps.Event.addListener(mapNaver, 'click', this.handleMapClick))
+      // Ui Events
+      const listeningEvents = this.props.listeningEvents || []
+      if (this.props.onUiEvent) {
+        Object.values(UiEvents)
+          .filter(evtType => listeningEvents.includes(evtType))
+          .forEach(eventType => {
+            this.listeners.push(
+              naver.maps.Event.addListener(mapNaver, eventType, this.props.onUiEvent),
+            )
+          })
+      }
 
-    this.setState({naver, mapNaver, CustomOverlay, loaded: true})
+      this.setState({naver, mapNaver, CustomOverlay, loaded: true})
 
-    this.props.onInit && this.props.onInit(mapNaver, window.naver)
+      this.props.onInit && this.props.onInit(mapNaver, window.naver)
+    })
   }
 
   handleBoundChanged = bounds => {
-    if (this.props.bbCheck) {
-      this.props.bbCheck(bounds, this.mapNaver.zoom)
-    }
+    // boundingbox 변경 이벤트 테스트용 삭제 0308
+    // if (this.props.bbCheck) {
+    //   this.props.bbCheck(bounds, this.mapNaver.zoom)
+    // }
 
     const self = this
     if (this.props.onBoundChange) {
       if (!this.lastBoundChangedTime || this.lastBoundChangedTime < +new Date() - 500) {
+        // bound change 이벤트 throttle 500ms
         this.lastBoundChangedTime = +new Date()
         self.props.onBoundChange(bounds)
       }
@@ -186,6 +195,7 @@ NaverMap.propTypes = {
     lng: PropTypes.number.isRequired,
   }),
   initialZoom: PropTypes.number,
+  maxZoom: PropTypes.number,
   onBoundChange: PropTypes.func,
   onMapClick: PropTypes.func,
   onUiEvent: PropTypes.func,

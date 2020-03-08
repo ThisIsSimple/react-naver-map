@@ -1,7 +1,7 @@
 {
   "name": "react-naver-map-fork",
-  "version": "0.0.30",
-  "description": "from React NaverMap Component, polygon and boundingBox modified",
+  "version": "0.0.31",
+  "description": "from React NaverMap Component, useStyleMap 옵션 추가. Polygon zIndex 옵션, NaverMap maxZoom 옵션 추가.. 0308",
   "author": "seongmo(nanangqq modified)",
   "license": "MIT",
   "repository": "nanangqq/react-naver-map",
@@ -24,8 +24,8 @@
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "@svgr/rollup": "^4.3.2",
