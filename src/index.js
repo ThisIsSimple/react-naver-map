@@ -5,6 +5,7 @@ import Marker from './Marker'
 import Overlay, {getCustomOverlayClass} from './Overlay'
 import Polyline from './Polyline'
 import Polygon from './Polygon'
+import Circle from './Circle'
 
 const MapContext = React.createContext({
   naver: undefined,
@@ -16,8 +17,9 @@ Marker.contextType = MapContext
 Overlay.contextType = MapContext
 Polyline.contextType = MapContext
 Polygon.contextType = MapContext
+Circle.contextType = MapContext
 
-export {Marker, Overlay, Polyline, Polygon}
+export {Marker, Overlay, Polyline, Polygon, Circle}
 
 export const UiEvents = {
   mousedown: 'mousedown',
@@ -48,6 +50,7 @@ class NaverMap extends React.Component {
   static Overlay = Overlay
   static Polygon = Polygon
   static Polyline = Polyline
+  static Circle = Circle
 
   constructor(props) {
     super(props)

@@ -6,6 +6,7 @@ import Marker from './Marker'
 import Overlay from './Overlay'
 import Polyline from './Polyline'
 import Polygon from './Polygon'
+import Circle from './Circle'
 
 const AppRouter = () => (
   <Router>
@@ -37,6 +38,11 @@ const AppRouter = () => (
               Polygon
             </NavLink>
           </li>
+          <li>
+            <NavLink activeClassName="active" to="/circle/">
+              Circle
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
@@ -44,7 +50,8 @@ const AppRouter = () => (
       <Route path="/marker/" component={Marker} />
       <Route path="/overlay/" component={Overlay} />
       <Route path="/polyline/" component={Polyline} />
-      <Route path="/polygon" component={Polygon} />
+      <Route path="/polygon/" component={Polygon} />
+      <Route path="/circle/" component={Circle} />
     </div>
   </Router>
 )
