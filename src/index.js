@@ -74,26 +74,8 @@ class NaverMap extends React.Component {
   }
 
   initMap = () => {
-    const mapOpts = {}
-    if (this.props.initialPosition) {
-      mapOpts.center = this.props.initialPosition
-    }
-    if (this.props.initialZoom) {
-      mapOpts.zoom = this.props.initialZoom
-    }
-    if (this.props.initialBounds) {
-      mapOpts.bounds = this.props.initialBounds
-    }
-    // 0308 maxZoom option 추가
-    if (this.props.maxZoom) {
-      mapOpts.maxZoom = this.props.maxZoom
-    }
-
-    // 타일맵 버전 변경 0225
-    mapOpts['useStyleMap'] = true
     this.naver = window.naver
-
-    const mapNaver = new naver.maps.Map(this.mapRef.current, mapOpts)
+    const mapNaver = new naver.maps.Map(this.mapRef.current, this.props.mapOptions)
     this.mapNaver = mapNaver
 
     // init_stylemap 이후 옵션 설정? 레이어 생성? 하라는 메세지 떠서 바꿈 0308
@@ -187,19 +169,8 @@ class NaverMap extends React.Component {
 NaverMap.propTypes = {
   clientId: PropTypes.string.isRequired,
   ncp: PropTypes.bool,
-  initialBounds: PropTypes.shape({
-    east: PropTypes.number.isRequired,
-    west: PropTypes.number.isRequired,
-    south: PropTypes.number.isRequired,
-    north: PropTypes.number.isRequired,
-  }),
-  initialPosition: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-  }),
+  mapOptions: PropTypes.object,
   jijuk: PropTypes.bool,
-  initialZoom: PropTypes.number,
-  maxZoom: PropTypes.number,
   onBoundChange: PropTypes.func,
   onMapClick: PropTypes.func,
   onUiEvent: PropTypes.func,
