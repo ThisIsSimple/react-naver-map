@@ -15,10 +15,6 @@ export default class Polygon extends React.Component {
   componentDidMount() {
     const {naver, mapNaver} = this.context
 
-    if (this.props.onClick) {
-      this.el.addEventListener('click', this.props.onClick)
-    }
-
     const polygon = new naver.maps.Polygon({
       paths: this.props.paths,
       fillColor: this.props.fillColor,
@@ -29,6 +25,10 @@ export default class Polygon extends React.Component {
       zIndex: this.props.zIndex,
     })
     this.polygon = polygon
+
+    if (this.props.onClick) {
+      polygon.clickEventListener = naver.maps.Event.addListener(polygon, 'click', this.props.onClick)
+    }
 
     polygon.setMap(mapNaver)
   }
@@ -52,7 +52,7 @@ export default class Polygon extends React.Component {
     const {naver} = this.context
     if (!naver || !this.polygon) return
     const polygon = this.polygon
-    this.el.removeEventListener('click', this.props.onClick)
+    naver.maps.Event.removeListener(polygon.clickEventListener)
     polygon.setMap(null)
   }
 
