@@ -10,6 +10,7 @@ export default class Polygon extends React.Component {
     strokeOpacity: t.number,
     strokeWeight: t.number,
     zIndex: t.number,
+    onClick: t.func,
   }
 
   componentDidMount() {
