@@ -10,7 +10,6 @@ export default class Polygon extends React.Component {
     strokeOpacity: t.number,
     strokeWeight: t.number,
     zIndex: t.number,
-    clickable: t.bool,
     onClick: t.func,
   }
 
@@ -25,7 +24,7 @@ export default class Polygon extends React.Component {
       strokeOpacity: this.props.strokeOpacity,
       strokeWeight: this.props.strokeWeight,
       zIndex: this.props.zIndex,
-      clickable: this.props.clickable,
+      clickable: !!this.props.onClick,
     })
     this.polygon = polygon
 
