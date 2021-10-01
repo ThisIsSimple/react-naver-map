@@ -14,6 +14,7 @@ export default class Marker extends React.Component {
     onDragStart: t.func,
     onDrag: t.func,
     onDragEnd: t.func,
+    onRightClick: t.func,
   }
 
   componentDidMount() {
@@ -29,18 +30,11 @@ export default class Marker extends React.Component {
       draggable: !!this.props.onDragStart || !!this.props.onDrag || !!this.props.onDragEnd
     })
     this.marker = marker
-    if (this.props.onClick) {
-      marker.clickEventListener = naver.maps.Event.addListener(marker, 'click', this.props.onClick)
-    }
-    if (this.props.onDragStart) {
-      marker.dragStartEventListener = naver.maps.Event.addListener(marker, 'dragstart', this.props.onDragStart)
-    }
-    if (this.props.onDrag) {
-      marker.dragEventListener = naver.maps.Event.addListener(marker, 'drag', this.props.onDrag)
-    }
-    if (this.props.onDragEnd) {
-      marker.dragEndEventListener = naver.maps.Event.addListener(marker, 'dragend', this.props.onDragEnd)
-    }
+    if (this.props.onClick) marker.listeners.push(naver.maps.Event.addListener(marker, 'click', this.props.onClick))
+    if (this.props.onDragStart) marker.listeners.push(naver.maps.Event.addListener(marker, 'dragstart', this.props.onDragStart))
+    if (this.props.onDrag) marker.listeners.push(naver.maps.Event.addListener(marker, 'drag', this.props.onDrag))
+    if (this.props.onDragEnd) marker.listeners.push(naver.maps.Event.addListener(marker, 'dragend', this.props.onDragEnd))
+    if (this.props.onRightClick) marker.listeners.push(naver.maps.Event.addListener(marker, 'rightclick', this.props.onRightClick))
     marker.setMap(mapNaver)
   }
 
@@ -61,10 +55,8 @@ export default class Marker extends React.Component {
     const {naver} = this.context
     if (!naver || !this.marker) return
     const marker = this.marker
-    naver.maps.Event.removeListener(marker.clickEventListener)
-    naver.maps.Event.removeListener(marker.dragStartEventListener)
-    naver.maps.Event.removeListener(marker.dragEventListener)
-    naver.maps.Event.removeListener(marker.dragEndEventListener)
+
+    marker.listeners.forEach(listener => naver.maps.Event.removeListener(listener))
     marker.setMap(null)
   }
 
