@@ -11,6 +11,9 @@ export default class Marker extends React.Component {
     lng: t.number.isRequired,
     shape: t.object,
     onClick: t.func,
+    onDragStart: t.func,
+    onDrag: t.func,
+    onDragEnd: t.func,
   }
 
   componentDidMount() {
@@ -23,10 +26,20 @@ export default class Marker extends React.Component {
       shape: shape,
       // size: new naver.maps.Size(60, 73),
       // anchor: new naver.maps.Point(30, 73)
+      draggable: !!this.props.onDragStart || !!this.props.onDrag || !!this.props.onDragEnd
     })
     this.marker = marker
     if (this.props.onClick) {
       marker.clickEventListener = naver.maps.Event.addListener(marker, 'click', this.props.onClick)
+    }
+    if (this.props.onDragStart) {
+      marker.dragStartEventListener = naver.maps.Event.addListener(marker, 'dragstart', this.props.onDragStart)
+    }
+    if (this.props.onDrag) {
+      marker.dragEventListener = naver.maps.Event.addListener(marker, 'drag', this.props.onDrag)
+    }
+    if (this.props.onDragEnd) {
+      marker.dragEndEventListener = naver.maps.Event.addListener(marker, 'dragend', this.props.onDragEnd)
     }
     marker.setMap(mapNaver)
   }
@@ -49,6 +62,9 @@ export default class Marker extends React.Component {
     if (!naver || !this.marker) return
     const marker = this.marker
     naver.maps.Event.removeListener(marker.clickEventListener)
+    naver.maps.Event.removeListener(marker.dragStartEventListener)
+    naver.maps.Event.removeListener(marker.dragEventListener)
+    naver.maps.Event.removeListener(marker.dragEndEventListener)
     marker.setMap(null)
   }
 
