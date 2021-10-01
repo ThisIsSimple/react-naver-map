@@ -99,6 +99,7 @@ class NaverMap extends React.Component {
         naver.maps.Event.addListener(mapNaver, 'bounds_changed', this.handleBoundChanged),
       )
       this.listeners.push(naver.maps.Event.addListener(mapNaver, 'click', this.handleMapClick))
+      this.listeners.push(naver.maps.Event.addListener(mapNaver, 'dblclick', this.handleMapDoubleClick))
       // Ui Events
       const listeningEvents = this.props.listeningEvents || []
       if (this.props.onUiEvent) {
@@ -135,6 +136,10 @@ class NaverMap extends React.Component {
 
   handleMapClick = e => {
     this.props.onMapClick && this.props.onMapClick(e)
+  }
+
+  handleMapDoubleClick = e => {
+    this.props.onMapDoubleClick && this.props.onMapDoubleClick(e)
   }
 
   componentWillUnmount() {
