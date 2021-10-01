@@ -30,6 +30,7 @@ export default class Marker extends React.Component {
       draggable: !!this.props.onDragStart || !!this.props.onDrag || !!this.props.onDragEnd
     })
     this.marker = marker
+    marker.listeners = []
     if (this.props.onClick) marker.listeners.push(naver.maps.Event.addListener(marker, 'click', this.props.onClick))
     if (this.props.onDragStart) marker.listeners.push(naver.maps.Event.addListener(marker, 'dragstart', this.props.onDragStart))
     if (this.props.onDrag) marker.listeners.push(naver.maps.Event.addListener(marker, 'drag', this.props.onDrag))
