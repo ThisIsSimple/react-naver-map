@@ -38,7 +38,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [ThisIsSimple/react-naver-map](https://github.com/ThisIsSimple/react-naver-map)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|32<br/>Tools used|11/30/23 <br/>Report generated|
+|34<br/>Tools used|01/05/24 <br/>Report generated|
 |------|------|
 </div>
 
@@ -175,9 +175,9 @@ Full tech stack [here](/techstack.md)
 </table>
 
 
-## <img src='https://img.stackshare.io/group.svg' /> Open source packages (18)</h2>
+## <img src='https://img.stackshare.io/group.svg' /> Open source packages (20)</h2>
 
-## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (18)
+## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (20)
 
 |NAME|VERSION|LAST UPDATED|LAST UPDATED BY|LICENSE|VULNERABILITIES|
 |:------|:------|:------|:------|:------|:------|
@@ -189,6 +189,8 @@ Full tech stack [here](/techstack.md)
 |[babel-preset-stage-0](https://www.npmjs.com/babel-preset-stage-0)|v6.24.1|12/20/18|Sungmo Kang |MIT|N/A|
 |[cross-env](https://www.npmjs.com/cross-env)|v5.2.1|12/20/18|Sungmo Kang |MIT|N/A|
 |[gh-pages](https://www.npmjs.com/gh-pages)|v1.2.0|12/20/18|Sungmo Kang |MIT|N/A|
+|[husky](https://www.npmjs.com/husky)|v1.3.1|12/20/18|Sungmo Kang |MIT|N/A|
+|[lint-staged](https://www.npmjs.com/lint-staged)|v8.2.1|12/20/18|Sungmo Kang |MIT|N/A|
 |[prop-types](https://www.npmjs.com/prop-types)|v15.7.2|12/20/18|Sungmo Kang |MIT|N/A|
 |[react-dom](https://www.npmjs.com/react-dom)|v16.14.0|12/20/18|Sungmo Kang |MIT|N/A|
 |[react-router-dom](https://www.npmjs.com/react-router-dom)|v4.3.1|12/20/18|Sungmo Kang |MIT|N/A|
